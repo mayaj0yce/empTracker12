@@ -1,20 +1,41 @@
-DROP DATABASE IF EXISTS movie_db;
-CREATE DATABASE movie_db;
+DROP DATABASE IF EXISTS tracker_db;
 
-USE movie_db;
+CREATE DATABASE tracker_db;
 
-CREATE TABLE movies (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  movie_name VARCHAR(100) NOT NULL
-)
+USE tracker_db;
 
+CREATE TABLE department ( id INT PRIMARY KEY, name VARCHAR(30) );
 
-CREATE TABLE reviews (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  movie_id INT NOT NULL,
-  -- put the rest of the columns here
+CREATE TABLE
+    role (
+        id INT PRIMARY KEY,
+        title VARCHAR(30),
+        salary DECIMAL,
+        department_id INT
+    );
 
+CREATE TABLE
+    employee (
+        id INT PRIMARY KEY,
+        first_name VARCHAR(30),
+        last_name DECIMAL,
+        manager_id INT
+    );
 
-  FOREIGN KEY (movie_id)
-  REFERENCES movies(id)
-)
+-- CREATE TABLE
+--     courses (
+--         id INT NOT NULL,
+--         course_title VARCHAR(30) NOT NULL,
+--         course_description TEXT NOT NULL,
+--         active BOOLEAN NOT NULL,
+--         date_added DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+--     );
+
+-- CREATE TABLE
+--     students (
+--         id INT NOT NULL,
+--         first_name VARCHAR(30) NOT NULL,
+--         last_name VARCHAR(30) NOT NULL,
+--         active BOOLEAN NOT NULL,
+--         date_updated DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+    -- );
