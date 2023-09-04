@@ -46,9 +46,9 @@ Then start MySQL (my password and username are already stored in a secure .env f
  ### Walk Through Video
  [link to video](#)
   
-### Learning 
+ ### Learning 
 I was able to submit this late and it really helped my understanding of other projects and allowed me to have a better grasp of more complex systems we will be working with. 
 Learning to use the terminal commands was a little tricky at first but I was able to soon get the hang of it and can now use the ones I memorized in my own coding life. 
 
-### Creator 
+ ### Creator 
 My name is [MayaJoyce](https://github.com/mayaj0yce) I am currently a bootcamp student learning JavaScript, HTML, CSS, Sequile, MySQL, Node.js, etc. and intend to learn more  about the ins and outs of the other coding languages. 
