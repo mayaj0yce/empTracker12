@@ -40,7 +40,7 @@ inquirer.prompt(questions).then((answers) => {
   } else if (answers.option === 'View All Roles') {
     viewAllRoles();
   } else if (answers.option === 'View All Employees') {
-    ViewAllEmployees();
+    viewAllEmployees();
   } else if (answers.option === 'Add a Department') {
     addADepartment();
   } else if (answers.option === 'Add a Role') {
@@ -85,7 +85,7 @@ function viewAllRoles() {
 };
 
 // View All Employees
-function ViewAllEmployees() {
+function viewAllEmployees() {
   connection.query('SELECT * FROM employees',() => {
     if (err) {
       console.error(err);
@@ -94,6 +94,31 @@ function ViewAllEmployees() {
   console.table(results);
   openTable();
   });
+};
+
+// Add A Department
+function addADepartment() {
+
+}
+
+// Add A Role
+function addARole() {
+
+}
+
+// Add An Employee
+function addAnEmployee() {
+
+}
+
+// Update An Employee
+function updateAnEmployee() {
+
+}
+
+// Delete An Employee
+function deleteAnEmployee() {
+
 };
 
 
