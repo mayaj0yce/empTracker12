@@ -1,16 +1,24 @@
 {
-  "name": "demo",
+  "name": "tracker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "seed": "node seeds/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mysql2": "^3.5.0"
+    "mysql2": "^3.6.0",
+    "sequelize": "^6.32.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

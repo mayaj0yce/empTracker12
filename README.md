@@ -7,6 +7,12 @@ walk through
 link to ^^
 github link 
 
+need: Routes
+seed data, this is done i think?
+
+### Homework to do:
+need to use the server or index?
+
 
 video:
 invoke from command line.
