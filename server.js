@@ -38,26 +38,26 @@ choices: [
 },
 ]
 }
-inquirer.prompt(questions).then((answers) => {
-    if (answers.option === '' ) {
-
+inquirer.prompt( questions ).then((answers) => {
+    if (answers.option === 'View All Departments' ) {
+viewAllDepartments();
     }
-    if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
-    }  if (answers.option === '' ) {
-        
+    if (answers.option === 'View All Roles' ) {
+        viewAllRoles();
+    }  if (answers.option === 'View All Employees' ) {
+        viewAllEmployees();
+    }  if (answers.option === 'Add a Department') {
+        addADepartment();
+    }  if (answers.option === 'Add a Role' ) {
+        addARole();
+    }  if (answers.option === 'Add an Employee' ) {
+        addAnEmployee();
+    }  if (answers.option === 'Update an Employee' ) {
+        updateAnEmployee();
+    }  if (answers.option === 'Delete an Employee' ) {
+        deleteAnEmployee();
+    }  if (answers.option === 'Exit' ) {
+        exit();
     }
 })
 
