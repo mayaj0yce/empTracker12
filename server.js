@@ -1,27 +1,32 @@
 const mysql = require('mysql2');
-// const express = require('express');
-const inquirer = require("inquirer");
-const table = require('console.table');
+const express = require('express');
+const sequelize = require('./config/connections');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    port: '3001',
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+var inquirer = require('inquirer');
+// const consoleTable = require('console.table');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Connect to the database before starting the Express.js server
+sequelize.sync().then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
 });
-connection.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('connection complete');
-    startQuestions();
-});
+// connection.connect((err) => {
+//     if (err) {
+//         throw err;
+//     }
+//     console.log('connection complete');
+//     startQuestions();
+// });
 
 
 function startQuestions() {
-    inquirer
-        .prompt({
+    const questions = [
+            {
             type: 'list',
             name: 'option',
             message: 'What would you like to do?',
@@ -36,35 +41,27 @@ function startQuestions() {
                 'Delete an Employee',
                 'Exit',
             ],
-        })
-        .then(function (result) {
-            switch (result.option) {
-                case 'View All Departments':
-                    viewAllDepartments();
-                    break;
-                case 'View All Roles':
-                    viewAllRoles();
-                    break;
-                case 'View All Employees':
-                    viewAllEmployees();
-                    break;
-                case 'Add A Department':
-                    addADepartment();
-                    break;
-                case 'Add A Role':
-                    addARole();
-                    break;
-                case 'Add An Employee':
-                    addAnEmployee();
-                    break;
-                case 'Update Employee':
-                    updateAnEmployee();
-                    break;
-                case 'Delete An Employee':
-                    deleteAnEmployee();
-                    break;
-                case 'Exit':
-                    exit();
+        }]
+        inquirer.prompt( questions ).then((answers) => {
+            if (answers.option === 'View All Departments' ) {
+        viewAllDepartments();
+            }
+            if (answers.option === 'View All Roles' ) {
+                viewAllRoles();
+            }  if (answers.option === 'View All Employees' ) {
+                viewAllEmployees();
+            }  if (answers.option === 'Add a Department') {
+                addADepartment();
+            }  if (answers.option === 'Add a Role' ) {
+                addARole();
+            }  if (answers.option === 'Add an Employee' ) {
+                addAnEmployee();
+            }  if (answers.option === 'Update an Employee' ) {
+                updateAnEmployee();
+            }  if (answers.option === 'Delete an Employee' ) {
+                deleteAnEmployee();
+            }  if (answers.option === 'Exit' ) {
+                exit();
             }
         });
 }
@@ -72,30 +69,104 @@ function startQuestions() {
 
 //functions of above options 
 function viewAllDepartments() {
-    connection.query('SELECT * FROM department', (err, results) => {
+    connection.query('SELECT * FROM department', (err, res) => {
         if (err) {
             console.log(err);
             return;
         }
-        console.table(results);
-        openTable();
+        console.table(res);
+        startQuestions();
     });
 };
 //now repeat for all of the above :)
 
 function viewAllEmployees() {
-    connection.query('SELECT * FROM employees')
+    connection.query('SELECT * FROM employees', (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(res);
+        startQuestions();
+    });
+};
+
+function viewAllRoles() {
+    connection.query('SELECT * FROM roles', (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(res);
+        startQuestions();
+    });
+};
+
+function addADepartment() {
+    inquirer.prompt(
+        {
+            type: 'input',
+            name: 'departmentName',
+            message: 'name:'
+        },
+    )
+    .then((answers) => {
+        const departmentName = answers.departmentName;
+        connection.query('INSERT INTO department SET ?', { dep_name: departmentName }, (err, res) => {
+            if (err) {
+                console.error(err);
+                return;
+              }
+              viewAllDepartments();
+            }
+            );
+    })
 }
 
+function addARole() {
+    inquirer.prompt(
+        {
+            type: 'input',
+            name: 'roleName',
+            message: 'name:'
+        },
+    )
+    .then((answers) => {
+        const roleName = answers.roleName;
+        connection.query('INSERT INTO role SET ?', { roles: roleName}, (err, res) => {
+            if (err) {
+                console.error(err);
+                return;
+              }
+              viewAllRoles();
+            }
+            );
+    })
+}
 
-// GET ALL departments
-// GET ALL roles
-// GET ALL employees
+function addAnEmployee() {
+    inquirer.prompt(
+        {
+            type: 'input',
+            name: 'EmpName',
+            message: 'name:'
+        },
+    )
+    .then((answers) => {
+        const EmpName = answers.EmpName;
+        connection.query('INSERT INTO employee SET ? ', { employee: EmpName}, (err, res) => {
+            if (err) {
+                console.error(err);
+                return;
+              }
+              viewAllEmployees();
+        })
+    })
+}
 
-// ADD department 
-// ADD role
-// ADD employee
-
+function deleteAnEmployee() {
+    
+}
 // UPDATE employee
 
 // DELETE employee
@@ -103,3 +174,10 @@ function viewAllEmployees() {
 
 
 startQuestions();
+
+
+// to do 
+// run from terminal 
+// inquirer needs to function 
+// db . query or inquirer . prompt? 
+// how to delete vs update 
