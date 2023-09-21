@@ -1,65 +1,92 @@
 const mysql = require('mysql2');
-const express = require('express');
-const sequelize = require('./config/connections');
+// const express = require('express');
+const inquirer = require("inquirer");
+const table = require('console.table');
 
-// const inquirer = require('inquirer');
-// const consoleTable = require('console.table');
-//Need?
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: '3001',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
+connection.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('connection complete');
+    startQuestions();
+});
 
-require('dotenv').config();
-
-
-const app = express();
-const PORT = process.env.PORT || 3001;
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-sequelize.sync().then(() => {
-    app.listen(PORT, () => console.log('Now listening'));
-  });
 
 function startQuestions() {
-    const questions = [
-        {
-type: 'list',
-name: 'option',
-message: 'What would you like to do?',
-choices: [
-    'View All Departments',
-    'View All Roles',
-    'View All Employees',
-    'Add a Department',
-    'Add a Role',
-    'Add an Employee',
-    'Update an Employee Role',
-    'Delete an Employee',
-    'Exit', 
-],
-},
-]
+    inquirer
+        .prompt({
+            type: 'list',
+            name: 'option',
+            message: 'What would you like to do?',
+            choices: [
+                'View All Departments',
+                'View All Roles',
+                'View All Employees',
+                'Add a Department',
+                'Add a Role',
+                'Add an Employee',
+                'Update an Employee',
+                'Delete an Employee',
+                'Exit',
+            ],
+        })
+        .then(function (result) {
+            switch (result.option) {
+                case 'View All Departments':
+                    viewAllDepartments();
+                    break;
+                case 'View All Roles':
+                    viewAllRoles();
+                    break;
+                case 'View All Employees':
+                    viewAllEmployees();
+                    break;
+                case 'Add A Department':
+                    addADepartment();
+                    break;
+                case 'Add A Role':
+                    addARole();
+                    break;
+                case 'Add An Employee':
+                    addAnEmployee();
+                    break;
+                case 'Update Employee':
+                    updateAnEmployee();
+                    break;
+                case 'Delete An Employee':
+                    deleteAnEmployee();
+                    break;
+                case 'Exit':
+                    exit();
+            }
+        });
 }
-inquirer.prompt( questions ).then((answers) => {
-    if (answers.option === 'View All Departments' ) {
-viewAllDepartments();
-    }
-    if (answers.option === 'View All Roles' ) {
-        viewAllRoles();
-    }  if (answers.option === 'View All Employees' ) {
-        viewAllEmployees();
-    }  if (answers.option === 'Add a Department') {
-        addADepartment();
-    }  if (answers.option === 'Add a Role' ) {
-        addARole();
-    }  if (answers.option === 'Add an Employee' ) {
-        addAnEmployee();
-    }  if (answers.option === 'Update an Employee' ) {
-        updateAnEmployee();
-    }  if (answers.option === 'Delete an Employee' ) {
-        deleteAnEmployee();
-    }  if (answers.option === 'Exit' ) {
-        exit();
-    }
-})
+
+
+//functions of above options 
+function viewAllDepartments() {
+    connection.query('SELECT * FROM department', (err, results) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(results);
+        openTable();
+    });
+};
+//now repeat for all of the above :)
+
+function viewAllEmployees() {
+    connection.query('SELECT * FROM employees')
+}
+
 
 // GET ALL departments
 // GET ALL roles

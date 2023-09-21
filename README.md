@@ -33,6 +33,7 @@ Using seeded data there is a walk through demonstrating each part of the project
 
 ## Table of Contents 
  -[Requirements](#requirements)
+ 
  -[Walk Through](#)
  -[Video](#video)
  -[Learning](#learning)
