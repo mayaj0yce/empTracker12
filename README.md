@@ -7,15 +7,13 @@ walk through
 link to ^^
 github link 
 
-need: Routes
-seed data, this is done i think?
-
-### Homework to do:
-need to use the server or index?
-
 
 video:
 invoke from command line.
+<!-- node server.js
+mysql -u root -p
+source schema.sql
+source seeds.sql -->
 functional menu (1 view all departments, 2 view all roles, 3 view all employees, 4 ADD a department, 5 ADD a role, 6 ADD an employee, 7 UPDATE employee role)
 
 1 dep names and id

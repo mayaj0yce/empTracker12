@@ -19,7 +19,8 @@ sequelize.sync().then(() => {
   });
 
 function startQuestions() {
-    const questions = {
+    const questions = [
+        {
 type: 'list',
 name: 'option',
 message: 'What would you like to do?',
@@ -31,13 +32,34 @@ choices: [
     'Add a Role',
     'Add an Employee',
     'Update an Employee Role',
-    'Update an Employee Manager',
     'Delete an Employee',
     'Exit', 
 ],
+},
+]
 }
-}
+inquirer.prompt(questions).then((answers) => {
+    if (answers.option === '' ) {
 
+    }
+    if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }  if (answers.option === '' ) {
+        
+    }
+})
 
 // GET ALL departments
 // GET ALL roles
