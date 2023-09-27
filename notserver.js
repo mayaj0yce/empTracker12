@@ -24,6 +24,17 @@ sequelize.sync().then(() => {
 // });
 
 
+// function viewAllDepartments() {
+//     connection.query('SELECT * FROM department', (err, res) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         console.table(res);
+//         startQuestions();
+//     });
+// };
+
 function startQuestions() {
     const questions = [
         {
