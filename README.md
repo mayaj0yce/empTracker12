@@ -16,7 +16,7 @@ source schema.sql
 source seeds.sql -->
 functional menu (1 view all departments, 2 view all roles, 3 view all employees, 4 ADD a department, 5 ADD a role, 6 ADD an employee, 7 UPDATE employee role)
 
-1 dep names and id
+<!-- 1 dep names and id -->
 2 job titles, role id, department belonging to, salary
 3 employee data, ids, first name, last name, job title, department, salary, managers 
 4 prompt for name of new dep

@@ -1,4 +1,5 @@
 const connection = require('./connections')
+// const startQuestions  = require('../server')
 
 class DB {
     //view all departments
@@ -6,61 +7,24 @@ class DB {
         this.connection = connection
     }
     viewAllDepartments() {
-        connection.query('SELECT * FROM department', (err, res) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.table(res);
-            startQuestions();
-        });
+    return this.connection.query('SELECT * FROM department')
     };
 
-//view all roles
+    //view all roles
     viewAllRoles() {
-        connection.query('SELECT * FROM roles', (err, res) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.table(res);
-            startQuestions();
-        });
+       return this.connection.query('SELECT roles.id, roles.title, roles.salary, department.department_name AS department FROM roles LEFT JOIN department ON roles.department = department.id;')
     };
 
     //view all employees
     viewAllEmployees() {
-        connection.query('SELECT * FROM employees', (err, res) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.table(res);
-            startQuestions();
-        });
+        return this.connection.query('SELECT * FROM employee ')
+           // console.log data for this in server.js and then parse data post
     };
 
-//add department
-    addADepartment() {
-        inquirer.prompt(
-            {
-                type: 'input',
-                name: 'departmentName',
-                message: 'name:'
-            },
-        )
-            .then((answers) => {
-                const departmentName = answers.departmentName;
-                connection.query('INSERT INTO department SET ?', { dep_name: departmentName }, (err, res) => {
-                    if (err) {
-                        console.error(err);
-                        return;
-                    }
-            // console.table(res);????
-                    viewAllDepartments();
-                }
-                );
-            });
+    //add department
+    addDepartment(newDepartment) {
+        return this.connection.query('INSERT INTO department(department_name) VALUES (?)', newDepartment)
+        // INSERT INTO department(department_name) VALUES ("Bacon");
     };
 
     // Add a Role
@@ -79,7 +43,7 @@ class DB {
                         console.error(err);
                         return;
                     }
-            // console.table(res);????
+                    // console.table(res);????
                     viewAllRoles();
                 }
                 );
@@ -87,7 +51,7 @@ class DB {
     }
 
     // Add an Employee
- addAnEmployee() {
+    addAnEmployee() {
         inquirer.prompt(
             {
                 type: 'input',
@@ -102,7 +66,7 @@ class DB {
                         console.error(err);
                         return;
                     }
-            // console.table(res);???
+                    // console.table(res);???
 
                     viewAllEmployees();
                 })
@@ -111,12 +75,12 @@ class DB {
 
     //Update an Employee
     updateAnEmployee() {
-    
+
     }
-    
+
     //Delete an Employee
     deleteAnEmployee() {
-    
+
     }
 }
 

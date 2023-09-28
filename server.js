@@ -1,7 +1,7 @@
 // const express = require('express');
 // const sequelize = require('./config/connections.js');
-const db = require('./config/')
-
+const db = require('./config')
+// console.log(db);
 var inquirer = require('inquirer');
 
 
@@ -19,92 +19,111 @@ function startQuestions() {
                 'Add a Department',
                 'Add a Role',
                 'Add an Employee',
-                'Update an Employee',
+                'Update an Employee Role',
                 'Delete an Employee',
                 'Exit',
             ],
         }]
         inquirer.prompt(questions).then((answers) => {
             if (answers.option === 'View All Departments') {
-                db.viewAllDepartments;
+                viewDepartments();
             } else if (answers.option === 'View All Roles') {
-                db.viewAllRoles;
+                viewAllRoles();
             } else if (answers.option === 'View All Employees') {
                 viewAllEmployees();
             } else if (answers.option === 'Add a Department') {
-                addADepartment();
+                addDepartment();
             } else if (answers.option === 'Add a Role') {
-                addARole();
+                db.addARole();
             } else if (answers.option === 'Add an Employee') {
-                addAnEmployee();
-            } else if (answers.option === 'Update an Employee') {
-                updateAnEmployee();
+                db.addAnEmployee();
+            } else if (answers.option === 'Update an Employee Role') {
+                db.updateAnEmployee;
             } else if (answers.option === 'Delete an Employee') {
-                deleteAnEmployee();
+                db.deleteAnEmployee;
             } else if (answers.option === 'Exit') {
-                exit();
+                db.exit;
             }
         });
     }
     startQuestions();
 
+    // module.exports = startQuestions;
     
     
     //functions of above options 
-    // function viewAllDepartments() {
-    //     connection.query('SELECT * FROM department', (err, res) => {
-    //         if (err) {
-    //             console.log(err);
-    //             return;
-    //         }
-    //         console.table(res);
-    //         startQuestions();
-    //     });
-    // };
+    function viewDepartments() {
+          db.viewAllDepartments()
+          .then((data) => {
+            const parseData = data[0].map((department)=> {
+                return `department: ${department.department_name}, id: ${department.id}`
+            })
+        // console.log(parseData)
+            parseData.forEach((dpt)=> {
+                // console.log('\n')
+                console.log(dpt)
+            })
+          })
+          .then(() => 
+            startQuestions()
+          )
+    };
+
+    //view all roles
+    function viewAllRoles() {
+db.viewAllRoles()
+.then((data) => {
+    const parseData = data[0].map((roles)=> {
+        return `role: ${roles.title}, id: ${roles.id}, salary: $${roles.salary}k, department: ${roles.department}`
+    })
+    parseData.forEach((dpt)=> {
+        console.log(dpt)
+    })
+  })
+
+        .then(() => 
+            startQuestions()
+          )
+        };
     //now repeat for all of the above :)
     
-    // function viewAllEmployees() {
-    //     connection.query('SELECT * FROM employees', (err, res) => {
-    //         if (err) {
-    //             console.log(err);
-    //             return;
-    //         }
-    //         console.table(res);
-    //         startQuestions();
-    //     });
-    // };
+    function viewAllEmployees() {
+        db.viewAllEmployees()
+    .then((data) => {
+        const parseData = data[0].map((employee) => {
+            return `first name: ${employee.first_name}, last name: ${employee.last_name}, id: ${employee.id}, job title: ${employee.role_id}, manager id: ${employee.manager}`
+        })
+            parseData.forEach((Emp) => {
+                console.log(Emp)
+            })
+    })
+    .then(() => 
+     startQuestions()
+  )
+};
     
-    // function viewAllRoles() {
-    //     connection.query('SELECT * FROM roles', (err, res) => {
-    //         if (err) {
-    //             console.log(err);
-    //             return;
-    //         }
-    //         console.table(res);
-    //         startQuestions();
-    //     });
-    // };
+    // 
     
-    // function addADepartment() {
-    //     inquirer.prompt(
-    //         {
-    //             type: 'input',
-    //             name: 'departmentName',
-    //             message: 'name:'
-    //         },
-    //     )
-    //         .then((answers) => {
-    //             const departmentName = answers.departmentName;
-    //             connection.query('INSERT INTO department SET ?', { dep_name: departmentName }, (err, res) => {
-    //                 if (err) {
-    //                     console.error(err);
-    //                     return;
-    //                 }
-    //                 viewAllDepartments();
-    //             }
-    //             );
-    //         })
-    // }
+    function addDepartment() {
+        inquirer.prompt(
+            {
+                type: 'input',
+                name: 'departmentName',
+                message: 'name:'
+            },
+        )
+        .then((newDepartment) => {
+        console.log(newDepartment)
+
+          db.addDepartment(newDepartment.departmentName)
+        })
+        .then(() => 
+        viewDepartments()
+      )
+        .then(() => 
+        startQuestions()
+      )
+    };
     
     // function addARole() {
     //     inquirer.prompt(
