@@ -1,12 +1,8 @@
 # empTracker12
 employee tracker
 
-submit:
 
-walk through 
-link to ^^
-github link 
-
+https://github.com/mayaj0yce/empTracker12.git
 
 video:
 invoke from command line.
@@ -49,7 +45,7 @@ To begin you will want to install the necessary modules. `npm i` // `npm init`
 Then start MySQL (my password and username are already stored in a secure .env file that is being ignored in git)
 
  ### Walk Through Video
- [link to video](#)
+ [link to video](https://youtu.be/NRbkgqew7jA)
   
  ### Learning 
 I was able to submit this late and it really helped my understanding of other projects and allowed me to have a better grasp of more complex systems we will be working with. 
