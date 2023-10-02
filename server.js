@@ -1,7 +1,6 @@
-// const express = require('express');
-// const sequelize = require('./config/connections.js');
-const db = require('./config')
-// console.log(db);
+const db = require('./config');
+const connection = require('./config/connections');
+//  const select = require ('@inquirer/prompts');
 var inquirer = require('inquirer');
 
 
@@ -34,15 +33,15 @@ function startQuestions() {
             } else if (answers.option === 'Add a Department') {
                 addDepartment();
             } else if (answers.option === 'Add a Role') {
-                db.addARole();
+                addARole();
             } else if (answers.option === 'Add an Employee') {
-                db.addAnEmployee();
+                addAnEmployee();
             } else if (answers.option === 'Update an Employee Role') {
-                db.updateAnEmployee;
+                updateAnEmployee;
             } else if (answers.option === 'Delete an Employee') {
-                db.deleteAnEmployee;
+                deleteAnEmployee;
             } else if (answers.option === 'Exit') {
-                db.exit;
+                exit;
             }
         });
     }
@@ -102,50 +101,44 @@ db.viewAllRoles()
   )
 };
     
-    // 
+    // add a department
     
-    function addDepartment() {
-        inquirer.prompt(
-            {
-                type: 'input',
-                name: 'departmentName',
-                message: 'name:'
-            },
-        )
-        .then((newDepartment) => {
-        console.log(newDepartment)
+    async function addDepartment() {
+         const response = await inquirer.prompt(
+    {
+        type: 'input',
+        name: 'departmentName',
+        message: 'name:'
+    },
+)
+const data = await db.addDepartment(response.departmentName)
 
-          db.addDepartment(newDepartment.departmentName)
-        })
-        .then(() => 
-        viewDepartments()
-      )
-        .then(() => 
-        startQuestions()
-      )
+viewDepartments();
+
     };
     
-    // function addARole() {
-    //     inquirer.prompt(
-    //         {
-    //             type: 'input',
-    //             name: 'roleName',
-    //             message: 'name:'
-    //         },
-    //     )
-    //         .then((answers) => {
-    //             const roleName = answers.roleName;
-    //             connection.query('INSERT INTO role SET ?', { roles: roleName }, (err, res) => {
-    //                 if (err) {
-    //                     console.error(err);
-    //                     return;
-    //                 }
-    //                 viewAllRoles();
-    //             }
-    //             );
-    //         })
-    // }
-    
+    //add a role
+    async function addARole() {
+        const departmentData = await connection.query('SELECT * FROM department')
+        const data = await departmentData[0].map(({ id, department_name}) => ({ name: department_name, value: id}))
+        // console.log(data)
+       const response = await inquirer.prompt(
+            {
+                type: 'input',
+                name: 'roleName',
+                message: 'title:'
+            },
+            {
+                type: 'list',
+                name: 'roleDepartment',
+                message: 'Pick a department:',
+                choices: data
+            },
+        
+        )
+// console.log(response);
+    };
+
     // function addAnEmployee() {
     //     inquirer.prompt(
     //         {

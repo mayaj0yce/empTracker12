@@ -2,10 +2,10 @@ INSERT INTO department (department_name)
 VALUES ('Meat'), ('Fruit'), ('Dairy'), ('Bakery'), ('Grocer');
 
 
-INSERT INTO Roles (
+INSERT INTO role (
     title, 
     salary, 
-    department ) 
+    department_id ) 
     VALUES 
     ('Meat_Packer', 26.69, 1), 
     ('Price_Tagger', 22.23, 2),
@@ -18,7 +18,7 @@ INSERT INTO
         first_name,
         last_name,
         role_id,
-        manager )
+        manager_id )
 VALUES 
 ('Ronald', 'Firbank', 1, 1), 
 ('Max', 'Mods', 3, 1), 

@@ -12,7 +12,7 @@ class DB {
 
     //view all roles
     viewAllRoles() {
-       return this.connection.query('SELECT roles.id, roles.title, roles.salary, department.department_name AS department FROM roles LEFT JOIN department ON roles.department = department.id;')
+       return this.connection.query('SELECT role.id, role.title, role.salary, department.department_name AS department FROM role LEFT JOIN department ON role.department_id = department.id;')
     };
 
     //view all employees
@@ -21,34 +21,21 @@ class DB {
            // console.log data for this in server.js and then parse data post
     };
 
+
+
+
     //add department
     addDepartment(newDepartment) {
-        return this.connection.query('INSERT INTO department(department_name) VALUES (?)', newDepartment)
+        return this.connection.query(`INSERT INTO department(department_name) VALUES ('${newDepartment}')`)
         // INSERT INTO department(department_name) VALUES ("Bacon");
     };
 
+    
+
     // Add a Role
     addARole() {
-        inquirer.prompt(
-            {
-                type: 'input',
-                name: 'roleName',
-                message: 'name:'
-            },
-        )
-            .then((answers) => {
-                const roleName = answers.roleName;
-                connection.query('INSERT INTO role SET ?', { roles: roleName }, (err, res) => {
-                    if (err) {
-                        console.error(err);
-                        return;
-                    }
-                    // console.table(res);????
-                    viewAllRoles();
-                }
-                );
-            })
-    }
+      return this.connection.query('INSERT INTO role(title, salary, department_id) VALUES (?)', newRole)
+    };
 
     // Add an Employee
     addAnEmployee() {
