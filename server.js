@@ -117,6 +117,7 @@ viewDepartments();
 
     };
     
+    
     //add a role
     async function addARole() {
         const departmentData = await connection.query('SELECT * FROM department')
