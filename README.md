@@ -7,8 +7,36 @@ Using seeded data there is a walk through demonstrating each part of the project
 
 https://github.com/mayaj0yce/empTracker12.git
 
-video:
-invoke from command line.
+
+
+## Table of Contents 
+ -[Requirements](#requirements)
+
+ -[Video](#video)
+
+ -[Walk Through](#walkthrough)
+
+ -[Learning](#learning)
+
+ -[Creator](#me)
+
+ ### Requirements 
+
+As a user I want to be able to see my employees, their roles, departments, salary, etc in one easy to use application. 
+WHEN I follow the steps in the walk through
+THEN I am able to view the data I want and add data as needed.
+
+
+ ### Walk Through Video
+
+ [link to video](https://www.youtube.com/watch?v=l4st0vExEw8)
+
+
+ ### Walk Through
+
+To begin you will want to install the necessary modules. `npm i` // `npm init`
+Then start MySQL (my password and username are already stored in a secure .env file that is being ignored in git)
+From here seed the schema and the seeds through db/schema.sql and db/seeds.sql
 
 `node server.js`
 
@@ -23,26 +51,6 @@ invoke from command line.
 follow the command lines 
 
 
-## Table of Contents 
- -[Requirements](#requirements)
- -[Walk Through](#)
- -[Video](#video)
- -[Learning](#learning)
- -[Creator](#me)
-
- ### Requirements 
-As a user I want to be able to see my employees, their roles, departments, salary, etc in one easy to use application. 
-WHEN I follow the steps in the walk through
-THEN I am able to view the data I want and add data as needed.
-
- ### Walk Through
-To begin you will want to install the necessary modules. `npm i` // `npm init`
-Then start MySQL (my password and username are already stored in a secure .env file that is being ignored in git)
-From here seed the schema and the seeds through db/schema.sql and db/seeds.sql
-
-
- ### Walk Through Video
- [link to video](https://youtu.be/NRbkgqew7jA)
   
  ### Learning 
 I was able to submit this late and it really helped my understanding of other projects and allowed me to have a better grasp of more complex systems we will be working with. 
